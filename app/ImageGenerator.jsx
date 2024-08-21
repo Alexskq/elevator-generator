@@ -35,6 +35,7 @@ export const ImageGenerator = (props) => {
           // Ajoute le border-radius et le boxShadow
           boxShadow: `0 0 ${props.settings.shadow}px rgba(0,0,0,.${props.settings.shadow})`,
           borderRadius: `${props.settings.radius}px`,
+          display: "flex",
         }}
       />
     </div>

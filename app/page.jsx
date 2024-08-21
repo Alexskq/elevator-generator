@@ -11,10 +11,17 @@ export default function Home() {
   });
   const [image, setImage] = useState();
   const [disabled, setDisabled] = useState(false);
+  const [loading, setLoading] = useState("idle");
 
   const handleImage = (e) => {
     const file = e.target.files[0];
     const fileName = file.name;
+
+    if (file.type !== "image/png") {
+      alert("Please upload a PNG file");
+      e.target.value = "";
+      return;
+    }
 
     const reader = new FileReader();
     console.log(reader);
@@ -43,6 +50,29 @@ export default function Home() {
     setSettings((curr) => ({ ...curr, [name]: Number(value) }));
   };
   console.log(settings);
+
+  const handleDownload = async (isCopy) => {
+    setLoading(isCopy ? "copying" : "downloading");
+    const { blob } = await renderPNG({
+      image,
+      settings,
+    });
+    const url = URL.createObjectURL(blob);
+
+    if (isCopy) {
+      await navigator.clipboard.write([
+        new ClipboardItem({ "image/png": blob }),
+      ]);
+    } else {
+      // Fais en sorte de télécharger l'image ici
+      const element = document.createElement("a");
+      element.download = image.name;
+      element.href = url;
+      document.body.appendChild(element);
+      element.click();
+    }
+    setLoading("idle");
+  };
 
   return (
     <main className="flex max-lg:flex-col justify-center m-auto max-w-4xl items-center gap-8 min-h-full">
@@ -73,9 +103,9 @@ export default function Home() {
               className="range range-primary"
             />
           </label>
-          <label class="form-control w-full max-w-xs">
-            <div class="label">
-              <span class="label-text">Shadow</span>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Shadow</span>
             </div>
             <input
               type="range"
@@ -87,9 +117,9 @@ export default function Home() {
               className="range range-primary"
             />
           </label>
-          <label class="form-control w-full max-w-xs">
-            <div class="label">
-              <span class="label-text">Radius</span>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Radius</span>
             </div>
             <input
               type="range"
@@ -103,7 +133,6 @@ export default function Home() {
           </label>
         </div>
       </div>
-
       <div
         // retirer flex - 1
         style={{ maxWidth: 400 }}
@@ -113,26 +142,27 @@ export default function Home() {
       >
         <ImageGenerator settings={settings} image={image} />
       </div>
-      <button
-        className="btn btn-active btn-primary mt-2"
-        disabled={!image}
-        onClick={async () => {
-          const { blob } = await renderPNG({
-            image,
-            settings,
-          });
-          const url = URL.createObjectURL(blob);
+      {/* // désactiver le bouton quand on télécharge l'image */}
 
-          // Fais en sorte de télécharger l'image ici
-          const element = document.createElement("a");
-          element.download = image.name;
-          element.href = url;
-          document.body.appendChild(element);
-          element.click();
-          setDisabled(true);
-        }}
+      <button
+        className="btn btn-primary "
+        onClick={() => handleDownload(false)}
+        disabled={loading !== "idle"}
       >
         Download
+        {loading === "downloading" ? (
+          <span className="loading loading-spinner loading-sm "></span>
+        ) : null}
+      </button>
+      <button
+        className="btn "
+        onClick={() => handleDownload(true)}
+        disabled={loading !== "idle"}
+      >
+        Copy
+        {loading === "copying" ? (
+          <span className="loading loading-spinner loading-sm "></span>
+        ) : null}
       </button>
     </main>
   );
