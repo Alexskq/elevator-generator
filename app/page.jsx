@@ -24,7 +24,6 @@ export default function Home() {
     }
 
     const reader = new FileReader();
-    console.log(reader);
 
     reader.onloadend = () => {
       const img = new Image();
@@ -43,13 +42,11 @@ export default function Home() {
     reader.readAsDataURL(file);
   };
   // console.log(reader);
-  console.log(image);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setSettings((curr) => ({ ...curr, [name]: Number(value) }));
   };
-  console.log(settings);
 
   const handleDownload = async (isCopy) => {
     setLoading(isCopy ? "copying" : "downloading");
@@ -75,95 +72,100 @@ export default function Home() {
   };
 
   return (
-    <main className="flex max-lg:flex-col justify-center m-auto max-w-4xl items-center gap-8 min-h-full">
-      <div className="card flex-1 bg-base-200 w-96 shadow-xl">
-        <div className="card-body">
-          <h2 className="font-semibold text-lg">Settings</h2>
-          <label class="form-control w-full max-w-xs">
-            <div class="label">
-              <span class="label-text">Pick a file</span>
-            </div>
-            <input
-              type="file"
-              className="file-input file-input-primary w-full max-w-xs"
-              onChange={handleImage}
-            />
-          </label>
-          <label class="form-control w-full max-w-xs">
-            <div class="label">
-              <span class="label-text">Padding</span>
-            </div>
-            <input
-              type="range"
-              min={0}
-              max="99"
-              defaultValue={Number(settings.padding)}
-              onChange={(e) => handleChange(e)}
-              name="padding"
-              className="range range-primary"
-            />
-          </label>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Shadow</span>
-            </div>
-            <input
-              type="range"
-              min={0}
-              max="99"
-              defaultValue={Number(settings.shadow)}
-              onChange={(e) => handleChange(e)}
-              name="shadow"
-              className="range range-primary"
-            />
-          </label>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Radius</span>
-            </div>
-            <input
-              type="range"
-              min={0}
-              max="99"
-              defaultValue={Number(settings.radius)}
-              onChange={(e) => handleChange(e)}
-              name="radius"
-              className="range range-primary"
-            />
-          </label>
+    <main className="overflow-hidden">
+      <h1 className="text-4xl text-primary text-center font-semibold mt-20 overflow-y-hidden">
+        Elevation Generator
+      </h1>
+      <section className="flex justify-center items-center max-lg:flex-col m-auto max-w-4xl mt-5 gap-8 min-h-full py-7">
+        <div className="card  bg-base-200 w-96 shadow-xl">
+          <div className="card-body">
+            <h2 className="font-semibold text-lg">Settings</h2>
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text">Pick a file</span>
+              </div>
+              <input
+                type="file"
+                className="file-input file-input-primary w-full max-w-xs"
+                onChange={handleImage}
+              />
+            </label>
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text">Padding</span>
+              </div>
+              <input
+                type="range"
+                min={0}
+                max="99"
+                defaultValue={Number(settings.padding)}
+                onChange={(e) => handleChange(e)}
+                name="padding"
+                className="range range-primary"
+              />
+            </label>
+            <label className="form-control w-full max-w-xs">
+              <div className="label">
+                <span className="label-text">Shadow</span>
+              </div>
+              <input
+                type="range"
+                min={0}
+                max="99"
+                defaultValue={Number(settings.shadow)}
+                onChange={(e) => handleChange(e)}
+                name="shadow"
+                className="range range-primary"
+              />
+            </label>
+            <label className="form-control w-full max-w-xs">
+              <div className="label">
+                <span className="label-text">Radius</span>
+              </div>
+              <input
+                type="range"
+                min={0}
+                max="99"
+                defaultValue={Number(settings.radius)}
+                onChange={(e) => handleChange(e)}
+                name="radius"
+                className="range range-primary"
+              />
+            </label>
+          </div>
         </div>
-      </div>
-      <div
-        // retirer flex - 1
-        style={{ maxWidth: 400 }}
-        className={`w-full h-fit ${
-          image ? "border" : ""
-        } rounded-md  max-w-md lg:max-w-none overflow-hidden h-fit w-fit flex`}
-      >
-        <ImageGenerator settings={settings} image={image} />
-      </div>
-      {/* // désactiver le bouton quand on télécharge l'image */}
-
-      <button
-        className="btn btn-primary "
-        onClick={() => handleDownload(false)}
-        disabled={loading !== "idle"}
-      >
-        Download
-        {loading === "downloading" ? (
-          <span className="loading loading-spinner loading-sm "></span>
-        ) : null}
-      </button>
-      <button
-        className="btn "
-        onClick={() => handleDownload(true)}
-        disabled={loading !== "idle"}
-      >
-        Copy
-        {loading === "copying" ? (
-          <span className="loading loading-spinner loading-sm "></span>
-        ) : null}
-      </button>
+        <div
+          // retirer flex - 1
+          style={{ maxWidth: 400 }}
+          className={`w-full h-fit ${
+            image ? "border" : ""
+          } rounded-md flex-1 max-w-md lg:max-w-none overflow-hidden h-fit w-fit flex`}
+        >
+          <ImageGenerator settings={settings} image={image} />
+        </div>
+        <div className="flex gap-4">
+          <button
+            className="btn btn-primary "
+            onClick={() => handleDownload(false)}
+            disabled={loading !== "idle"}
+          >
+            Download
+            {loading === "downloading" ? (
+              <span className="loading loading-spinner loading-sm "></span>
+            ) : null}
+          </button>
+          <button
+            className="btn "
+            onClick={() => handleDownload(true)}
+            disabled={loading !== "idle"}
+          >
+            Copy
+            {loading === "copying" ? (
+              <span className="loading loading-spinner loading-sm "></span>
+            ) : null}
+          </button>
+        </div>
+      </section>
     </main>
   );
 }
