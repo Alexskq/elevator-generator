@@ -1,6 +1,6 @@
 # Elevation Generator
 
-[https://elevator-generator.vercel.app/]
+https://elevator-generator.vercel.app/
 
 Ce projet est une application React qui permet de générer des images avec des paramètres de style personnalisés tels que le padding, l'ombre et le rayon de bordure. L'application permet également de télécharger ou de copier l'image générée.
 
