@@ -2,39 +2,34 @@
 
 https://elevator-generator.vercel.app/
 
-Ce projet est une application React qui permet de générer des images avec des paramètres de style personnalisés tels que le padding, l'ombre et le rayon de bordure. L'application permet également de télécharger ou de copier l'image générée.
+This project is a React application that allows users to generate images with custom style settings such as padding, shadow, and border radius. The application also enables downloading or copying the generated image.
 
-## Technologies Utilisées
+## Technologies Used
 
-- **React.js** :
+- **React.js**
 - **Tailwind CSS**
-- **Daisyui**
+- **DaisyUI**
 - **FileReader API** 
-  
 
-## Fonctionnalités
+## Features
 
-- **Téléchargement d'image** : Télécharger une image depuis votre appareil pour la personnaliser.
-- **Personnalisation des styles** : Ajuster le padding, l'ombre et le rayon de bordure de l'image.
-- **Téléchargement et copie** : Téléchargez l'image personnalisée ou copiez-la dans le presse-papiers.
+- **Image Upload**: Upload an image from your device to customize.
+- **Style Customization**: Adjust the image's padding, shadow, and border radius.
+- **Download and Copy**: Download the customized image or copy it to the clipboard.
 
-## Installation et Utilisation
+## Installation and Usage
 
-### Prérequis
-- **Node.js** (version 14.x ou supérieure)
-- **npm** (gestionnaire de paquets de Node.js)
+### Prerequisites
+- **Node.js** (version 14.x or higher)
+- **npm** (Node.js package manager)
 
 ### Installation
 
-Clonez le dépôt du projet :
+Clone the project repository:
    ```bash
    git clone https://github.com/yourusername/elevation-generator.git
    cd elevation-generator
 
    npm install
    npm run dev
-  ```
-
-
-
-
+  ```  
