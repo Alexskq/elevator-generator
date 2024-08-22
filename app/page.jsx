@@ -73,7 +73,7 @@ export default function Home() {
 
   return (
     <main className="overflow-hidden">
-      <h1 className="text-4xl text-primary text-center font-semibold mt-20 overflow-y-hidden tracking-widest font-extrabold">
+      <h1 className="text-4xl text-primary text-center mt-20 overflow-y-hidden tracking-widest font-extrabold">
         Elevation Generator
       </h1>
       <div className="text-center mt-5 text-lg font">
