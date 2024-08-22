@@ -73,9 +73,12 @@ export default function Home() {
 
   return (
     <main className="overflow-hidden">
-      <h1 className="text-4xl text-primary text-center font-semibold mt-20 overflow-y-hidden">
+      <h1 className="text-4xl text-primary text-center font-semibold mt-20 overflow-y-hidden tracking-widest font-extrabold">
         Elevation Generator
       </h1>
+      <div className="text-center mt-5 text-lg font">
+        <p> Select our image and add some elevation</p>
+      </div>
       <section className="flex justify-center items-center max-lg:flex-col m-auto max-w-4xl mt-5 gap-8 min-h-full py-7">
         <div className="card  bg-base-200 w-96 shadow-xl">
           <div className="card-body">
