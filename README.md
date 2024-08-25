@@ -20,8 +20,8 @@ This project is a React application that allows users to generate images with cu
 ## Installation and Usage
 
 ### Prerequisites
-- **Node.js** (version 14.x or higher)
-- **npm** (Node.js package manager)
+- **Node.js** 
+- **npm** or **pnpm**
 
 ### Installation
 
